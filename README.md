@@ -18,3 +18,5 @@ for insertion : http://localhost:5000/
 for getresponse with maximum number of simultaneous calls :  http://localhost:5000/
 we recieve response with the latest maximum number of simultaneous calls
 
+
+please refer jar https://appquiz1.s3.ap-south-1.amazonaws.com/TIMESTAMP-0.0.1-SNAPSHOT.jar
