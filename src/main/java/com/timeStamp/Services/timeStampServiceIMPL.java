@@ -13,11 +13,16 @@ import java.util.Stack;
 
 import org.springframework.stereotype.Service;
 
+
 import com.timeStamp.Model.ApiResponse;
 import com.timeStamp.Model.timeStamp;
+import org.slf4j.LoggerFactory;  
+import ch.qos.logback.classic.Logger;
 
 @Service
 public class timeStampServiceIMPL implements timeStampServices {
+	
+	Logger logger=(Logger) LoggerFactory.getLogger(timeStampServiceIMPL.class); 
 
 	@Override
 	public ApiResponse addTimestamp(timeStamp timeStamp) {
@@ -31,6 +36,7 @@ public class timeStampServiceIMPL implements timeStampServices {
 				bufferedWriter.write(timeStamp.getStart() + ":" + timeStamp.getEnd());
 				bufferedWriter.newLine();
 				apiResponse = new ApiResponse("SuccessFully added in the Log file");
+				logger.info("added successfully in log file ["+timeStamp.getStart()+"],["+timeStamp.getEnd()+"]");
 				bufferedWriter.close();
 
 			} catch (IOException e) {
@@ -40,7 +46,9 @@ public class timeStampServiceIMPL implements timeStampServices {
 
 		} else {
 			apiResponse = new ApiResponse("Please send the proper input format");
+			logger.info("Please send the proper input format");
 		}
+	
 		return apiResponse;
 	}
 
@@ -60,12 +68,20 @@ public class timeStampServiceIMPL implements timeStampServices {
 			FileReader fileReader = new FileReader("log.txt");
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 			String data = bufferedReader.readLine();
+			if(data==null)
+			{
+				logger.info("File is Empty");
+				return new ApiResponse("File is Empty");
+			}
 			while (data != null) {
 				//check whether : sign has in proper position 
+		
 				int number = data.indexOf(":");
+			
 				//checking the position , it might be different as per the requirement
 				if(number!=10)
 				{
+					logger.info("The data is corrupted , Please check the file");
 					return new ApiResponse("The data is corrupted , Please check the file");
 				}
 				//fetch the start timestamp
@@ -136,7 +152,7 @@ public class timeStampServiceIMPL implements timeStampServices {
 				}
 				max_end=minValue;
 			}
-			
+			logger.info("The peak for this call log is "+max_len+" simultaneous calls, that occurred between "+max_start+" and "+max_end);
 		 apiResponse=new ApiResponse("The peak for this call log is "+max_len+" simultaneous calls, that occurred between "+max_start+" and "+max_end);
 			
 

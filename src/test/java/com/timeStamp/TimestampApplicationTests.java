@@ -57,17 +57,11 @@ class TimestampApplicationTests {
 		assertEquals(pickTimeResponse.getMessage(), "The data is corrupted , Please check the file");
 	}
 
+	
 	// checking with the proper data
 	@Test
 	public void checkWithproperInput() {
-		try {
-			PrintWriter writer = new PrintWriter("log.txt");
-			writer.print("");
-			writer.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 		timeStamp stamp = new timeStamp(1385718408, 1385718452);
 		ApiResponse apiResponse = this.timeStampServiceIMPL.addTimestamp(stamp);
 		timeStamp stamp1 = new timeStamp(1385718408, 1385718464);
@@ -75,7 +69,8 @@ class TimestampApplicationTests {
 
 		ApiResponse pickTimeResponse = this.timeStampServiceIMPL.getPickTime();
 		System.out.println(pickTimeResponse.getMessage());
-		assertTrue(pickTimeResponse.getMessage().contains("The peak for this call log is 2 simultaneous calls, that occurred between 1385718408 and 1385718452"));
+		assertTrue(pickTimeResponse.getMessage().contains(
+				"The peak for this call log is 2 simultaneous calls, that occurred between 1385718408 and 1385718452"));
 	}
 
 }

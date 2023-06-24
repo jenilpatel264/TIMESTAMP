@@ -13,6 +13,10 @@ public class timeStamp {
 		return "timeStamp [start=" + start + ", end=" + end + "]";
 	}
 
+	public timeStamp() {
+		super();
+	}
+
 	public timeStamp(int start, int end) {
 		super();
 		this.start = start;
