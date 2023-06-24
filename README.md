@@ -13,6 +13,7 @@ if data is mismatch with the inproper signature , during that time we received r
 
 Here , I have also developed insert method in the log file , but you can change directly in log.txt.
 
+Note: here refer timestamp length is 10 so try with that , it can be other range but I emulated the example which is given by you.
 
 for insertion : http://localhost:5000/
 for getresponse with maximum number of simultaneous calls :  http://localhost:5000/
