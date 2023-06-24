@@ -58,9 +58,18 @@ class TimestampApplicationTests {
 	}
 
 	
+
 	// checking with the proper data
 	@Test
 	public void checkWithproperInput() {
+		try {
+			PrintWriter writer = new PrintWriter("log.txt");
+			writer.print("");
+			writer.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		timeStamp stamp = new timeStamp(1385718408, 1385718452);
 		ApiResponse apiResponse = this.timeStampServiceIMPL.addTimestamp(stamp);
